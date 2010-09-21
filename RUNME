@@ -6,8 +6,11 @@
 # FMINER
 if [ ! -d fminer2 ]; then
   git clone git://github.com/amaunz/fminer2
-  cd fminer2/; ./build_all.sh; cd -
-  make -C fminer2
+  cd fminer2/; ./build_all.sh; 
+  if [ $? -gt 0 ]; then
+    exit 1
+  fi
+  cd -
 fi
 
 if [ -e fminer2/fminer/fminer ]; then
@@ -20,21 +23,21 @@ fi
 # LAZAR
 if [ ! -d lazar-core ]; then
   git clone git://github.com/amaunz/lazar-core
-  cd lazar-core; ./configure
-  if [ $? -gt 0 ]; then
-    exit 1
-  fi
-  cd -
-  make -C lazar-core lazar
-  if [ $? -gt 0 ]; then
-    exit 1
-  fi
+fi
+cd lazar-core; ./configure
+if [ $? -gt 0 ]; then
+  exit 1
+fi
+cd -
+make -C lazar-core lazar
+if [ $? -gt 0 ]; then
+  exit 1
 fi
 
 if [ -e lazar-core/lazar ]; then
   LAZAR_DIR=$(pwd)/lazar-core
 else
-  echo "Lazar mot found. Aborting..."
+  echo "Lazar not found. Aborting..."
   exit
 fi
 
@@ -60,6 +63,8 @@ for t in "$MOC" "$MUC" "$SM" "$RC"; do
   echo $fn
 
   echo
+  export FMINER_LAZAR=1
+  export FMINER_SMARTS=1
   $FMINER -f6 -a "$t.smi" "$t.class" > "$fn.linfrag" 
   echo
   $LAZAR -s "$t.smi" -t "$t.class" -f "$fn.linfrag" -x > "$fn.loo"
