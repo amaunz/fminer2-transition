@@ -1,0 +1,67 @@
+#!/bin/bash
+# 
+# Feature Calculation Step
+# This is to demnonstrate that fminer2 and C++ Lazar can reproduce KDD 2009 paper results.
+
+# FMINER
+if [ ! -d fminer2 ]; then
+  git clone git://github.com/amaunz/fminer2
+  fminer2/build_all.sh
+  make -C fminer2
+fi
+
+if [ -e fminer2/fminer/fminer ]; then
+  FMINER2_DIR=$(pwd)/fminer2
+else
+  echo "Fminer mot found. Aborting..."
+  exit
+fi
+
+# LAZAR
+if [ ! -d lazar-core ]; then
+  git clone git://github.com/amaunz/lazar-core
+  cd lazar-core; ./configure ; cd -
+  make -C lazar-core lazar
+fi
+
+if [ -e lazar-core/lazar ]; then
+  LAZAR_DIR=$(pwd)/lazar-core
+else
+  echo "Lazar mot found. Aborting..."
+  exit
+fi
+
+# R
+if [ ! -d cpdbdata ]; then
+  git clone git://github.com/amaunz/cpdbdata
+fi
+
+if [ ! -d $(HOME)/.R ]; then
+  mkdir $(HOME)/.R
+fi
+export R_LIBS="$R_LIBS:$(HOME)/.R"
+
+
+FMINER="$FMINER2_DIR/fminer/fminer $FMINER2_DIR/libbbrc/libbbrc.so"
+LAZAR="$LAZAR_DIR/lazar"
+L2S="$HOME/validations/lazar-core/loo2summary.rb"
+
+MOC="$(pwd)/cpdbdata/mouse_carcinogenicity/mouse_carcinogenicity_alt"
+MUC="$(pwd)/cpdbdata/multi_cell_call/multi_cell_call_alt"
+SM="$(pwd)/cpdbdata/salmonella_mutagenicity/salmonella_mutagenicity_alt"
+RC="$(pwd)/cpdbdata/rat_carcinogenicity/rat_carcinogenicity_alt"
+
+exit
+
+for t in "$MOC" "$MUC" "$SM" "$RC"; do
+  fn=$(echo $t | sed 's/.*\///g')
+  echo $fn
+
+  echo
+  $FMINER -f6 -a "$t.smi" "$t.class" > "$fn.linfrag" 
+  echo
+  $LAZAR -s "$t.smi" -t "$t.class" -f "$fn.linfrag" -x > "$fn.loo"
+  echo
+  $L2S "$fn.loo" "$fn.summary" "$fn"
+
+done
