@@ -1,0 +1,2 @@
+Run RUNME. It will try to download and compile fminer2, lazar-core and the cpdbdata.
+For lazar, you will have to configure R yourself.
