@@ -20,8 +20,15 @@ fi
 # LAZAR
 if [ ! -d lazar-core ]; then
   git clone git://github.com/amaunz/lazar-core
-  cd lazar-core; ./configure ; cd -
+  cd lazar-core; ./configure
+  if [ $? -gt 0 ]; then
+    exit 1
+  fi
+  cd -
   make -C lazar-core lazar
+  if [ $? -gt 0 ]; then
+    exit 1
+  fi
 fi
 
 if [ -e lazar-core/lazar ]; then
@@ -31,15 +38,10 @@ else
   exit
 fi
 
-# R
+# CPDB
 if [ ! -d cpdbdata ]; then
   git clone git://github.com/amaunz/cpdbdata
 fi
-
-if [ ! -d $(HOME)/.R ]; then
-  mkdir $(HOME)/.R
-fi
-export R_LIBS="$R_LIBS:$(HOME)/.R"
 
 
 FMINER="$FMINER2_DIR/fminer/fminer $FMINER2_DIR/libbbrc/libbbrc.so"
