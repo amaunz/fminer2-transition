@@ -25,9 +25,6 @@ if [ ! -d lazar-core ]; then
   git clone git://github.com/amaunz/lazar-core
 fi
 cd lazar-core; ./configure
-if [ $? -gt 0 ]; then
-  exit 1
-fi
 cd -
 make -C lazar-core lazar
 if [ $? -gt 0 ]; then
@@ -55,8 +52,6 @@ MOC="$(pwd)/cpdbdata/mouse_carcinogenicity/mouse_carcinogenicity_alt"
 MUC="$(pwd)/cpdbdata/multi_cell_call/multi_cell_call_alt"
 SM="$(pwd)/cpdbdata/salmonella_mutagenicity/salmonella_mutagenicity_alt"
 RC="$(pwd)/cpdbdata/rat_carcinogenicity/rat_carcinogenicity_alt"
-
-exit
 
 for t in "$MOC" "$MUC" "$SM" "$RC"; do
   fn=$(echo $t | sed 's/.*\///g')
