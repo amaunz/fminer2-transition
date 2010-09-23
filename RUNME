@@ -4,9 +4,13 @@
 # This is to demnonstrate that fminer2 and C++ Lazar can reproduce KDD 2009 paper results.
 
 # FMINER
-if [ ! -d fminer2 ]; then
-  git clone git://github.com/amaunz/fminer2
-  cd fminer2/; ./build_all.sh; 
+if [ ! -e fminer2/fminer/fminer ]; then
+  if [ ! -d fminer2 ]; then
+    git clone git://github.com/amaunz/fminer2
+  else
+    cd fminer2/; git pull; cd -
+  fi
+  cd fminer2/; ./build_all.sh;
   if [ $? -gt 0 ]; then
     exit 1
   fi
