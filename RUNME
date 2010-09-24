@@ -50,7 +50,7 @@ fi
 
 FMINER="$FMINER2_DIR/fminer/fminer $FMINER2_DIR/libbbrc/libbbrc.so"
 LAZAR="$LAZAR_DIR/lazar"
-L2S="$HOME/validations/lazar-core/loo2summary.rb"
+L2S="$LAZAR_DIR/loo2summary.rb"
 
 MOC="$(pwd)/cpdbdata/mouse_carcinogenicity/mouse_carcinogenicity_alt"
 MUC="$(pwd)/cpdbdata/multi_cell_call/multi_cell_call_alt"
