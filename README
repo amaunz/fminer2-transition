@@ -32,6 +32,6 @@ This document does not cover how to set this up, see http://rubyforge.org/projec
 4) Run RUNME. It will try to download and compile fminer2, lazar-core and the cpdbdata. If compilation fails, see the respective repository READMEs at http://github.com/amaunz/fminer2 and http://github.com/amaunz/lazar-core.
 
 
-If compilation was successful, it will download the cpdb data and run leave-one-out crossvalidation on it. Individual predictions can be found in the .loo file, test statistics in the .summary file. They should correspond (approximately) to the figures given in the KDD 2009 paper, which you can get from http://cs.maunz.de.
+If compilation was successful, it will download the cpdb data and run leave-one-out crossvalidation on it. Individual predictions can be found in the .loo file, test statistics in the .summary file. They should correspond closely to the figures given in the KDD 2009 paper, which you can get from http://cs.maunz.de.
 
 (c) 2010 Andreas Maunz, sep 2010
