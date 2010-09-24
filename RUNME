@@ -74,8 +74,16 @@ for t in "$MOC" "$MUC" "$SM" "$RC"; do
   export FMINER_SMARTS=1
   echo "  Feature Generation..."
   $FMINER -f6 -a "$t.smi" "$t.class" > "$fn.linfrag" 2>/dev/null
+  if [ $? -gt 0 ]; then
+    echo "  Failed!"
+    exit 1
+  fi
   echo "  Run Crossvalidation..."
   $LAZAR -s "$t.smi" -t "$t.class" -f "$fn.linfrag" -x > "$fn.loo" 2>/dev/null
+  if [ $? -gt 0 ]; then
+    echo "  Failed!"
+    exit 1
+  fi
   $L2S "$fn.loo" "$fn.summary" "$fn" >/dev/null 2>&1
 
 done
