@@ -13,7 +13,7 @@ if [ ! -e fminer2/fminer/fminer ]; then
   else
     cd fminer2/; git pull > /dev/null ; cd -
   fi
-  cd fminer2/; . build_all.sh
+  cd fminer2/; bash build_all.sh
   if [ $? -gt 0 ]; then
     exit 1
   fi
@@ -33,7 +33,7 @@ if [ ! -d lazar-core ]; then
   git clone git://github.com/amaunz/lazar-core > /dev/null
 fi
 echo "Configuring LAZAR..."
-cd lazar-core; . configure >> build.log 2>&1
+cd lazar-core; bash configure >> build.log 2>&1
 cd -
 echo "Building LAZAR..."
 make -C lazar-core lazar >> build.log 2>&1
