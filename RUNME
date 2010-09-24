@@ -58,7 +58,7 @@ fi
 
 FMINER="$FMINER2_DIR/fminer/fminer $FMINER2_DIR/libbbrc/libbbrc.so"
 LAZAR="$LAZAR_DIR/lazar"
-L2S="$LAZAR_DIR/loo2summary.rb"
+L2S="ruby1.8 $LAZAR_DIR/loo2summary.rb"
 
 MOC="$(pwd)/cpdbdata/mouse_carcinogenicity/mouse_carcinogenicity_alt"
 MUC="$(pwd)/cpdbdata/multi_cell_call/multi_cell_call_alt"
@@ -84,6 +84,11 @@ for t in "$MOC" "$MUC" "$SM" "$RC"; do
     echo "  Failed!"
     exit 1
   fi
+  echo "  Run Statistics..."
   $L2S "$fn.loo" "$fn.summary" "$fn" >/dev/null 2>&1
+  if [ $? -gt 0 ]; then
+    echo "  Failed!"
+    exit 1
+  fi
 
 done
