@@ -5,24 +5,24 @@ This package aims to port and reproduce the KDD 2009 results on BBRC features to
 STEPS
 =====
 
-The application "RUNME" downloads and compiles fminer2 as well as the C++ version of lazar ("lazar-core"). It also downloads the CPDB carcinogenicity data that was used in the original study. For details see bbrc.maunz.de.
+The application "RUNME" downloads and compiles fminer2 as well as the C++ version of lazar ("lazar-core"). It also downloads the CPDB carcinogenicity data that was used in the original study. For details see http://bbrc.maunz.de.
 The validation is done using the original validation software (loo2summary.rb).
 
 USAGE
 =====
 
-Assumptions: you run a debian-based environment (e.g. Ubuntu).
+Assumptions: you run a debian-based environment (e.g. Ubuntu, used here).
 
 1) Perhaps you have R installed, otherwise install it:
-- aptitude install r-base-dev r-base r-base-core
+- sudo aptitude install r-base-dev r-base r-base-core
 Create a link to R: 'ln -sf /usr/lib/R/lib/libR.so /usr/lib/' or whereever your libR.so resides (default).
 
 2) Install the following packages:
-- aptitude install build-essential libopenbabel-dev libgsl0-dev ruby1.8-dev libboost1.40-dev
+- sudo aptitude install build-essential libopenbabel-dev libgsl0-dev ruby1.8-dev libboost1.40-dev
 Run 'updatedb'.
 
 3) Install the gem "rsruby" to integrate R in ruby. 
-- aptitude install rubygems
+- sudo aptitude install rubygems
 - export "R_HOME=/usr/lib/R"
 - echo "R_HOME=/usr/lib/R" > $HOME/.bashrc
 - gem install rsruby -- --with-R-dir=$R_HOME --with-R-include=/usr/share/R/include/
