@@ -1,6 +1,7 @@
 Welcome to Fminer2 transition package.
 
 This package aims to port and reproduce the KDD 2009 results on BBRC features to Fminer 2.0 version.
+More specifically, it reproduces the leave-one-out crossvalidation results from table 4, p. 7. You may download the article from http://cs.maunz.de ("Large-Scale Graph Mining Using Backbone Refinement Classes").
 
 STEPS
 =====
