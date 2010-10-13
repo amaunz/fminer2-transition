@@ -72,8 +72,8 @@ for t in "$MOC" "$MUC" "$SM" "$RC"; do
 
   export FMINER_LAZAR=1
   export FMINER_SMARTS=1
-  echo "  Feature Generation..."
-  $FMINER -f6 -a "$t.smi" "$t.class" > "$fn.linfrag" 2>/dev/null
+  echo "  Feature Generation with aromatic perception *dis*abled..."
+  $FMINER -f6 -a "$t.smi" "$t.class" > "$fn.linfrag" 
   if [ $? -gt 0 ]; then
     echo "  Failed!"
     exit 1
