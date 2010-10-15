@@ -36,3 +36,5 @@ For issues when setting up rsruby, see http://rubyforge.org/projects/rsruby/.
 If compilation was successful, it will download the CPDB data and run leave-one-out crossvalidation on it. Individual predictions can be found in the .loo file, test statistics in the .summary file. They should correspond closely to the figures given in the KDD 2009 paper, table 4, last row ("BBRC Repr."), which you can get from http://cs.maunz.de.
 
 (c) 2010 Andreas Maunz, sep 2010
+
+
